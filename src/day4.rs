@@ -53,18 +53,18 @@ fn valid_height(height: &str) -> bool {
         if let Ok(height) = height[0..height.len()-2].parse() {
             59 <= height && height <= 76
         } else {
-            eprintln!("Unreadable height (in)");
+            //eprintln!("Unreadable height (in)");
             false
         }
     } else if height.ends_with("cm") {
         if let Ok(height) = height[0..height.len()-2].parse() {
             150 <= height && height <= 193
         } else {
-            eprintln!("Unreadable height (cm)");
+            //eprintln!("Unreadable height (cm)");
             false
         }
     } else {
-        eprintln!("Unreadable height unit");
+        //eprintln!("Unreadable height unit");
         false
     }
 }
@@ -84,7 +84,7 @@ fn valid_ecl(ecl: &str) -> bool {
     match ecl {
         "amb" | "blu" | "brn" | "gry" | "grn" | "hzl" | "oth" => true,
         x => {
-            eprintln!("invalid ecl {}", x);
+            //eprintln!("invalid ecl {}", x);
             false
         }
     }
@@ -95,36 +95,27 @@ fn valid_pid(pid: &str) -> bool {
     pid.parse::<u64>().is_ok()
 }
 
-fn valid_passport(passport: &Passport) -> bool {
-    let mut valid = true;
-    valid &= 1920 <= passport.byr && passport.byr <= 2002;
-    valid &= 2010 <= passport.iyr && passport.iyr <= 2020;
-    valid &= 2020 <= passport.eyr && passport.eyr <= 2030;
-    valid &= valid_height(passport.hgt.as_str());
-    valid &= valid_hcl(passport.hcl.as_str());
-    valid &= valid_ecl(passport.ecl.as_str());
-    valid &= valid_pid(passport.pid.as_str());
-    valid
-}
 
 fn part1() -> usize {
     std::fs::read_to_string("inputs/day4.txt").unwrap()
         .split("\n\n")
-        .map(parse_passport)
-        .filter_map(|passport| passport.ok())
+        .filter_map(|s| parse_passport(s).ok())
         .count()
 }
 
 fn part2() -> usize {
     std::fs::read_to_string("inputs/day4.txt").unwrap()
         .split("\n\n")
-        .map(parse_passport)
-        .filter_map(|passport| passport.ok())
-        .filter(valid_passport)
-        .map(|p| {
-            //println!("{:#?}", p);
-            p
-        })
+        .filter_map(|s| parse_passport(s).ok())
+
+        .filter(|passport| 1920 <= passport.byr && passport.byr <= 2002 )
+        .filter(|passport| 2010 <= passport.iyr && passport.iyr <= 2020)
+        .filter(|passport| 2020 <= passport.eyr && passport.eyr <= 2030)
+        .filter(|passport| valid_height(passport.hgt.as_str()))
+        .filter(|passport| valid_hcl(passport.hcl.as_str()))
+        .filter(|passport| valid_ecl(passport.ecl.as_str()))
+        .filter(|passport| valid_pid(passport.pid.as_str()))
+
         .count()
 }
 
