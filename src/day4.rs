@@ -119,7 +119,7 @@ fn part2() -> usize {
         .count()
 }
 
-fn main() {
+pub fn main() {
     let p1 = part1();
     println!("DAY 4, PART 1: {}", p1);
     let p2 = part2();

@@ -99,7 +99,7 @@ impl ColorRuleMatrix {
     }
 }
 
-fn main() {
+pub fn main() {
     let parent_regex = Regex::new("([a-z ]*) bags* contain").unwrap();
     let member_regex = Regex::new("([0-9]+) ([a-z ]*) bags*").unwrap();
 

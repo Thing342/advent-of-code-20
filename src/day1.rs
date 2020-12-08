@@ -31,7 +31,7 @@ fn part1() -> i64 {
     input.sort();
 
     let (lo, hi) = find_addends(&input, TARGET).unwrap();
-    eprintln!("{} x {} = {}", lo, hi, lo * hi);
+    //eprintln!("{} x {} = {}", lo, hi, lo * hi);
 
     lo * hi
 }
@@ -43,7 +43,7 @@ fn part2() -> i64 {
     for it in &input {
         let delta = TARGET - it;
         if let Some((lo, hi)) = find_addends(&input, delta) {
-            eprintln!("{}, {}, {}", lo, it, hi);
+            //eprintln!("{}, {}, {}", lo, it, hi);
             return lo * it * hi
         }
     }
@@ -51,7 +51,7 @@ fn part2() -> i64 {
     panic!("Answer not found")
 }
 
-fn main() {
+pub fn main() {
     let p1 = part1();
     println!("DAY 1, PART 1: {}", p1);
     let p2 = part2();

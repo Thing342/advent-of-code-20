@@ -20,7 +20,7 @@ fn map_group_all(group_s: &str) -> HashSet<char> {
     combined
 }
 
-fn main() {
+pub fn main() {
     let input = std::fs::read_to_string("inputs/day6.txt").unwrap();
 
     let total: usize = input.split("\n\n")

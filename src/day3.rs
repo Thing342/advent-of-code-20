@@ -34,7 +34,7 @@ fn check_slope(input: &Vec<String>, slope_x: usize, slope_y: usize) -> usize {
         y += slope_y;
     }
 
-    eprintln!("({}, {}) -> {}", slope_x, slope_y, trees_seen);
+    //eprintln!("({}, {}) -> {}", slope_x, slope_y, trees_seen);
     trees_seen
 }
 
@@ -48,7 +48,7 @@ fn part2() -> usize {
     check_slope(&input, 1, 1) * check_slope(&input, 3, 1) * check_slope(&input, 5, 1) * check_slope(&input, 7, 1) * check_slope(&input, 1, 2)
 }
 
-fn main() {
+pub fn main() {
     let p1 = part1();
     println!("DAY 3, PART 1: {}", p1);
     let p2 = part2();

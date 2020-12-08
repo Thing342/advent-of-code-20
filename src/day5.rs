@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufReader, BufRead};
 
-fn main() {
+pub fn main() {
     let file = File::open("inputs/day5.txt").unwrap();
     let rdr = BufReader::new(file);
 
