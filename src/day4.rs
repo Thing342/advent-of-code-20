@@ -83,7 +83,7 @@ fn valid_hcl(hcl: &str) -> bool {
 fn valid_ecl(ecl: &str) -> bool {
     match ecl {
         "amb" | "blu" | "brn" | "gry" | "grn" | "hzl" | "oth" => true,
-        x => {
+        _ => {
             //eprintln!("invalid ecl {}", x);
             false
         }
