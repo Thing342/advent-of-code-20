@@ -1,5 +1,3 @@
-use std::fs::File;
-use std::io::{BufReader, BufRead};
 use std::collections::HashSet;
 
 use regex::Regex;
@@ -67,11 +65,7 @@ pub fn main() {
     let parent_regex = Regex::new("([a-z ]*) bags* contain").unwrap();
     let member_regex = Regex::new("([0-9]+) ([a-z ]*) bags*").unwrap();
 
-    let file = File::open("inputs/day7.txt").unwrap();
-    let rdr = BufReader::new(file);
-    let file_lines = rdr.lines()
-        .filter_map(|f| f.ok())
-        .collect::<Vec<String>>();
+    let file_lines = lib::lines("inputs/day7.txt");
 
     let mut color_rules = ColorRuleMatrix::with_capacity(file_lines.len());
 

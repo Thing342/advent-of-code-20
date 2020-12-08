@@ -1,4 +1,6 @@
 use std::collections::HashMap;
+use std::fs::File;
+use std::io::{BufReader, BufRead};
 
 #[derive(Debug)]
 pub struct IndexMap<T> {
@@ -37,4 +39,12 @@ impl <T> IndexMap<T> where
     pub fn len(&self) -> usize {
         self.map.len()
     }
+}
+
+pub fn lines(path: &str) -> Vec<String> {
+    let file = File::open(path).expect("Failed to open file");
+    let rdr = BufReader::new(file);
+    rdr.lines()
+        .filter_map(|f| f.ok())
+        .collect::<Vec<String>>()
 }
