@@ -13,23 +13,12 @@ enum SeatState {
     FLOOR,
 }
 
-fn p1() {
-    let file = File::open(FILE).expect("Failed to open file");
-    let rdr = BufReader::new(file);
-    let mut arena = rdr.bytes()
-        .filter_map(|b| b.ok())
-        .filter_map(|b| match b {
-            b'L' => Some(EMPTY),
-            b'.' => Some(FLOOR),
-            b'#' => Some(FILLED),
-            _ => None
-        }).collect::<Vec<_>>();
-
+fn p1(arena: &mut [SeatState], minesweeper_arena: &mut[i32]) {
     let arena_size = arena.len();
-    let mut minesweeper_arena = vec![0; arena_size];
+    //let mut minesweeper_arena = vec![0; arena_size];
 
     let mut filled = 0;
-    for round in 1..100 {
+    for _ in 1..100 {
         let mut n_filled = 0;
         let mut n_empty = 0;
         for i in 0..arena_size {
@@ -86,23 +75,11 @@ fn p1() {
     println!("DAY 11, PART 1: {}", filled);
 }
 
-fn p2() {
-    let file = File::open(FILE).expect("Failed to open file");
-    let rdr = BufReader::new(file);
-    let mut arena = rdr.bytes()
-        .filter_map(|b| b.ok())
-        .filter_map(|b| match b {
-            b'L' => Some(EMPTY),
-            b'.' => Some(FLOOR),
-            b'#' => Some(FILLED),
-            _ => None
-        }).collect::<Vec<_>>();
-
+fn p2(arena: &mut [SeatState], minesweeper_arena: &mut[i32]) {
     let arena_size = arena.len();
-    let mut minesweeper_arena = vec![0; arena_size];
 
     let mut filled = 0;
-    for round in 1..100 {
+    for _ in 1..100 {
         let mut n_filled = 0;
         let mut n_empty = 0;
         for i in 0..arena_size {
@@ -201,7 +178,27 @@ fn p2() {
     println!("DAY 11, PART 2: {}", filled);
 }
 
-fn main() {
-    p1();
-    p2();
+pub fn main() {
+    let file = File::open(FILE).expect("Failed to open file");
+    let rdr = BufReader::new(file);
+    let mut arena = rdr.bytes()
+        .filter_map(|b| b.ok())
+        .filter_map(|b| match b {
+            b'L' => Some(EMPTY),
+            b'.' => Some(FLOOR),
+            b'#' => Some(FILLED),
+            _ => None
+        }).collect::<Vec<_>>();
+
+    let mut minesweeper_arena = vec![0; arena.len()];
+
+    p1(&mut arena, &mut minesweeper_arena);
+
+    // reset
+    for i in 0..arena.len() {
+        if arena[i] == FILLED { arena[i] = EMPTY }
+        minesweeper_arena[i] = 0;
+    }
+
+    p2(&mut arena, &mut minesweeper_arena);
 }

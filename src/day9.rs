@@ -51,7 +51,7 @@ pub fn main() {
         }
 
         if acc == weakness.1 {
-            let bounds = (input[i], input[j]);
+            //let bounds = (input[i], input[j]);
             let slice = &input[i..j];
             //eprintln!("{} = {:?}", slice.iter().sum::<u64>(), slice);
 
