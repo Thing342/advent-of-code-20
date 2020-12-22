@@ -88,9 +88,9 @@ pub fn main() {
         ).collect::<HashSet<_>>()
     }).collect::<Vec<_>>();
 
-    for (i, k) in gs.iter().enumerate() {
-        eprintln!("{} {:?}", i, k)
-    }
+    //for (i, k) in gs.iter().enumerate() {
+    //    eprintln!("{} {:?}", i, k)
+    //}
 
     let mut mapping = HashMap::new();
     let mut remaining_rules = rules.iter().map(|r| r.field.as_str()).collect::<HashSet<_>>();
@@ -99,7 +99,7 @@ pub fn main() {
     while let Some(rule_id) = gs.iter().position(|g| g.len() == 1) {
         let rule = rules[rule_id].field.clone();
         let column = gs[rule_id].iter().next().unwrap().clone();
-        eprintln!("assign col {} == {} ({})", column, &rule, rule_id);
+        //eprintln!("assign col {} == {} ({})", column, &rule, rule_id);
         mapping.insert(rule.clone(), column);
         remaining_rules.remove(rule.as_str());
         remaining_cols.remove(&column);
@@ -108,9 +108,9 @@ pub fn main() {
             //eprintln!("{:?}", g);
         }
 
-        for (i, k) in gs.iter().enumerate() {
-            eprintln!("{} {:?}", i, k)
-        }
+        //for (i, k) in gs.iter().enumerate() {
+        //    eprintln!("{} {:?}", i, k)
+        //}
     }
 
     // bug i am too lazy to properly fix, so here's this hack
@@ -119,7 +119,7 @@ pub fn main() {
                        .unwrap().to_string()
                    , remaining_cols.drain().next().unwrap());
 
-    eprintln!("{:#?}", mapping);
+    //eprintln!("{:#?}", mapping);
 
     let p2 = your_ticket.0[mapping["departure location"] as usize] *
              your_ticket.0[mapping["departure station"] as usize] *
@@ -129,5 +129,5 @@ pub fn main() {
              //your_ticket.0[16] *
              your_ticket.0[mapping["departure time"] as usize];
 
-    eprintln!("DAY 16, PART 2: {}", p2)
+    println!("DAY 16, PART 2: {}", p2)
 }

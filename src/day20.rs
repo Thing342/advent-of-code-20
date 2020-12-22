@@ -157,7 +157,7 @@ pub fn main() {
         dict
     });
 
-    eprintln!("{:#?}", edge_counts.len());
+    //eprintln!("{:#?}", edge_counts.len());
     let mut grid: [[Option<Tile>; FIELDWIDTH];FIELDWIDTH] = Default::default();
     let mut unused = tiles.keys().map(|k| *k).collect::<BTreeSet<_>>();
 
@@ -178,7 +178,7 @@ pub fn main() {
             }
         };
 
-        eprint!("{:?}", (r,c));
+        //eprint!("{:?}", (r,c));
 
         let (tile, e, d) = unused.iter()
             .map(|id| tiles.get(id).unwrap())
@@ -195,7 +195,7 @@ pub fn main() {
                 Some((tile, e,d))
             }).unwrap();
 
-        eprintln!(" {}", tile.id);
+        //eprintln!(" {}", tile.id);
 
         unused.remove(&tile.id);
         grid[r][c] = Some(tile.rotated(e, (e+d)%4));

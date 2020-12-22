@@ -133,7 +133,7 @@ pub fn main() {
         .skip(rules.len() + 1)
         .filter(|s| {
             let z = regex_p2.is_match(s.as_str());
-            eprintln!("{} {}", s, z);
+            //eprintln!("{} {}", s, z);
             z
         })
         .count();

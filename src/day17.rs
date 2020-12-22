@@ -48,7 +48,7 @@ pub fn main() {
 
     let mut active_4d: HashSet<Hypercube> = active.iter().map(|cube| (cube.0, cube.1, cube.2, 0)).collect();
 
-    eprintln!("{:?} \n", active);
+    //eprintln!("{:?} \n", active);
 
     let mut next_gen: HashSet<Cube>;
     for generation in 0..6 {
