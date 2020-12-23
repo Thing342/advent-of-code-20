@@ -150,12 +150,12 @@ pub fn main() {
     let mut sol: (Int, Int) = rdr.lines()
         .filter_map(|r| r.ok())
         .map(|s| {
-            eprintln!("\t{}", &s);
+            //eprintln!("\t{}", &s);
             let i = eval1(&mut s.chars());
-            eprintln!("\t = {}", i);
+            //eprintln!("\t = {}", i);
 
             let j = eval2(&mut s.chars());
-            eprintln!("\t = {}", j);
+            //eprintln!("\t = {}", j);
 
             (i, j)
         })

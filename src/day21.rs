@@ -72,6 +72,7 @@ pub fn main() {
 
     let possible_mappings = all_allergens.iter()
         .map(|ag| {
+            // for each allergen, find the intersection of the ingredient-sets for recipes that contain that allergen
             let bag = recipes.iter()
                 .filter(|r| r.listed_allergens.contains(*ag))
                 .fold(HashSet::new(), |mut bag, recipe| {
@@ -89,6 +90,7 @@ pub fn main() {
 
     let mut allergen_free = HashSet::new();
     for recipe in &recipes {
+        // scan recipes for ingredients that do not appear in possible_mappings
         for ing in &recipe.ingredients {
             let b = possible_mappings.iter().any(|(k,v)| v.contains(ing));
             if !b {
@@ -100,6 +102,7 @@ pub fn main() {
     //eprintln!("{:#?}", allergen_free);
 
     let count = iproduct!(recipes.iter(), allergen_free.iter())
+        // for each allergen-free ingredient, count the number of appearances
         .filter(|(recipe, ing)| recipe.ingredients.contains(ing))
         .count();
 
